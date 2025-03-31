@@ -1,0 +1,35 @@
+services:
+  ollama:
+    container_name: ollama
+    image: ollama/ollama
+    entrypoint:
+      [
+        "/bin/bash",
+        "-c",
+        "ollama serve & sleep 5 && ollama pull smollm:135m && wait",
+      ]
+    volumes:
+        - ollama:/root/.ollama
+  crackable:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: crackable
+    environment:
+      PUID: $PUID
+      PGID: $PUID
+      OLLAMA_BASE_URLS: http://ollama:11434
+      WEBUI_SECRET_KEY: t0p-s3cr3t
+      BYPASS_MODEL_ACCESS_CONTROL: True
+    ports:
+      - 8080:8080
+    volumes:
+      - ./crackable:/app/backend/data
+      #- /var/run/docker.sock:/var/run/docker.sock        #use this for rootful docker
+      - /run/user/$PUID/docker.sock:/var/run/docker.sock  #use this for rootless docker
+    post_start:
+      - command: sh -c "until curl --output /dev/null --silent --head --fail http://localhost:8080; do sleep 1; done; python /app/backend/data/prepare_crackable.py"
+    depends_on:
+      - ollama
+    restart: unless-stopped
+volumes:
+    ollama:
+        name: ollama

@@ -1,0 +1,5 @@
+.env
+.vscode/*
+crackable/*
+!crackable/prepare_crackable.py
+!crackable/flag.txt

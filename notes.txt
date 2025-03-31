@@ -1,0 +1,17 @@
+Execution:
+
+User scans & finds Open WebUI running.
+User accesses, signs up, & logs in.
+User spots leaker action button and tries talking to it.
+Leaker action button leaks a UUID.
+User notices login cookie includes a UUID.
+User changes login cookie UUID to leaked UUID.
+User fails to authenicate (because JWT verification fails & need to set local storage, not cookie)
+Users looks up Open WebUI documetation and finds default JWT password (WEBUI_SECRET_KEY environment variable)
+User uses JWT password to sign their modified login cookie but still can't authenticate
+User eventually finds local storage setting, uses modified UUID, logs as in admin
+User, realizing that they can create a Function after interacting with leaker action button, creates a function
+This function can do anything server side, most likely just open a reverse shell
+User gets access to dockerized container (maybe user flag?)
+User uses knowledge of docker exploits and finds /run/docker.sock
+User breaks out of container using docker.sock and achieves root access on host (and finds root flag)
