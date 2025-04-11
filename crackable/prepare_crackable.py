@@ -152,7 +152,8 @@ def enable_signups(auth_token):
         "DEFAULT_USER_ROLE": "user",
         "JWT_EXPIRES_IN": "-1",
         "ENABLE_COMMUNITY_SHARING": True,
-        "ENABLE_MESSAGE_RATING": True
+        "ENABLE_MESSAGE_RATING": True,
+        "ENABLE_USER_WEBHOOKS": False
     }
     json_data = json.dumps(data)
     response = requests.post("http://localhost:8080/api/v1/auths/admin/config", headers=headers, data=json_data)
