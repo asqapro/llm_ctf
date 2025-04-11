@@ -27,8 +27,8 @@ services:
       - ./crackable:/app/backend/data
       #- /var/run/docker.sock:/var/run/docker.sock        #use this for rootful docker
       - /run/user/$PUID/docker.sock:/var/run/docker.sock  #use this for rootless docker
-    post_start:
-      - command: sh -c "until curl --output /dev/null --silent --head --fail http://localhost:8080; do sleep 1; done; python /app/backend/data/prepare_crackable.py"
+    #post_start:
+    #  - command: sh -c "until curl --output /dev/null --silent --head --fail http://localhost:8080; do sleep 1; done; python /app/backend/data/prepare_crackable.py"
     depends_on:
       - ollama
     restart: unless-stopped
