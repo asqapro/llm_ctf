@@ -159,7 +159,8 @@ def enable_signups(auth_token):
     response_str = response.content.decode("utf-8")
     json_response = json.loads(response_str)
     if response.status_code != 200:
-        print(f"Failed to enable signups, error message: {json_response['msg']}")
+        print(f"Failed to enable signups, error message: {json_response}")
+        #{json_response['msg']}")
         return None
 
 email = "admin@example.com"
