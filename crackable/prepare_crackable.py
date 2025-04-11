@@ -44,7 +44,13 @@ def login_as_admin(email, password):
     if response.status_code == 200:    
         return json_response["token"]
     else:
-        print(f"Failed to login to admin account, error message: {json_response['msg']}")
+        print(json_response)
+        error = ""
+        if "msg" in json_response:
+            error = json_response["msg"]
+        elif "detail" in json_response:
+            error = json_response["detail"]
+        print(f"Failed to login to admin account, error message: {error}")
         return None
 
 def create_expoitable_function(auth_token):
