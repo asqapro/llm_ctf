@@ -4,7 +4,7 @@ services:
     image: alpine/ollama
     entrypoint:
       [
-        "/bin/bash",
+        "/bin/sh",
         "-c",
         "ollama serve & sleep 5 && ollama pull smollm:135m && wait",
       ]
@@ -14,8 +14,6 @@ services:
     image: ghcr.io/open-webui/open-webui:main
     container_name: crackable
     environment:
-      PUID: $PUID
-      PGID: $PUID
       OLLAMA_BASE_URLS: http://ollama:11434
       WEBUI_SECRET_KEY: t0p-s3cr3t
       BYPASS_MODEL_ACCESS_CONTROL: True
