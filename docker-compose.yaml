@@ -1,7 +1,7 @@
 services:
   ollama:
     container_name: ollama
-    image: ollama/ollama
+    image: alpine/ollama
     entrypoint:
       [
         "/bin/bash",
