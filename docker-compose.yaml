@@ -6,7 +6,7 @@ services:
       [
         "/bin/sh",
         "-c",
-        "ollama serve & sleep 5 && ollama pull smollm:135m && wait",
+        "ollama serve & sleep 5 && ollama pull smollm2:135m && wait",
       ]
     volumes:
         - ollama:/root/.ollama
